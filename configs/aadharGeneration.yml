@@ -1,0 +1,20 @@
+artifacts_root: artifacts
+
+
+images_path : src/aadharGeneration/images
+
+template_path : artifacts/templates
+
+data_path : artifacts/data
+
+fonts_path : artifacts/fonts
+
+languages :
+  hi: hindi
+  bn: bengali
+  gu: gujarati
+  kn: kannada
+  ml: malayalam
+  ta: tamil
+  te: telugu
+  ur: urdu
