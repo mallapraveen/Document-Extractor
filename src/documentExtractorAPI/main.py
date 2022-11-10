@@ -1,7 +1,6 @@
 import sys, os
 from pathlib import Path
-#os.chdir(Path(os.getcwd() + "/src/documentExtractorAPI"))
-sys.path.insert(0, './yolov7')
+sys.path.insert(0, './src/yolov7')
 import cv2
 import warnings
 from constants import config
@@ -11,14 +10,13 @@ from constants import config
 from flask import Flask
 from api import flask_app, document_extraction, classification, classify_extract
 from flask_restx import Api, Resource
-# from yolov7.infer_single import infer_yolov7
-# from pipeline import aadhar_pipeline
-# from pipeline import aadhar_pipeline, pan_pipeline, cheque_pipeline, classify_pipeline, classify_extract_pipeline
-
+from infer_single import infer_yolov7
+from pipeline import aadhar_pipeline
+from pipeline import aadhar_pipeline, pan_pipeline, cheque_pipeline, classify_pipeline, classify_extract_pipeline
 
 if __name__ == '__main__':
 
-    # image_url = '../../sample images/Aadhar/Back_0.JPG'
+    # image_url = './sample images/Aadhar/Back_0.JPG'
     # image = cv2.imread(image_url)
     # labels = {0: 'aadharNumber', 1: 'address', 2: 'dob', 3: 'gender', 5: 'name'}
     # print(aadhar_pipeline(image))

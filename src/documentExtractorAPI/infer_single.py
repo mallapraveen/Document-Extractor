@@ -1,9 +1,9 @@
 import torch
 from PIL import Image
 
-from models.experimental import attempt_load
-from utils.datasets import LoadImages
-from utils.general import check_img_size, non_max_suppression, scale_coords
+from yolov7.models.experimental import attempt_load
+from yolov7.utils.datasets import LoadImages
+from yolov7.utils.general import check_img_size, non_max_suppression, scale_coords
 
 from tesseract import ocr_cropped_image
 from transformer import transformer_ocr
@@ -13,8 +13,8 @@ def infer_yolov7(model_path, image, labels, typ, transformerOcr):
 
     with torch.no_grad():
         im = Image.fromarray(image)
-        image_path = f'./yolov7/runs/detect/exp/{typ}.jpg'
-        im.save(f'./yolov7/runs/detect/exp/{typ}.jpg')
+        image_path = f'./src/yolov7/runs/detect/exp/{typ}.jpg'
+        im.save(f'./src/yolov7/runs/detect/exp/{typ}.jpg')
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         half = device.type != 'cpu'  # half precision only supported on CUDA
         # Load model

@@ -6,7 +6,7 @@ tox==3.25.1
 black==22.8.0
 flake8==5.0.4
 mypy==0.971
-# -e .
+-e .
 
 
 numpy==1.19.5
@@ -38,5 +38,3 @@ sentencepiece==0.1.95
 ipython  # interactive notebook
 psutil  # system utilization
 thop  # FLOPs computation
-
--e .

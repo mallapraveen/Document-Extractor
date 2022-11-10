@@ -1,5 +1,5 @@
 from constants import config
-from yolov7.infer_single import infer_yolov7
+from infer_single import infer_yolov7
 from exception_handling import TesseractOCR, Aadhar_Extraction, PAN_Extraction, Cheque_Extraction, Classify_Document, Classify_Extract_Document
 from classify_document import classify
 
