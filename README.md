@@ -41,7 +41,6 @@ This project is focused on information extraction from Offical Indian Documents 
 
 ```
 
-
 # Future Work
 
 This can be extended to other documents like Death Certificate, driving license etc.
