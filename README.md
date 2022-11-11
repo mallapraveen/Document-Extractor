@@ -8,7 +8,7 @@ This project is focused on information extraction from Offical Indian Documents 
 # Table Of Contents
 -  [In a Nutshell](#in-a-nutshell)
 -  [In Details](#in-details)
--  [Future Work](#Future Work)
+-  [Future Work](#future-work)
 -  [Contributing](#contributing)
 -  [Acknowledgments](#acknowledgments)
 
