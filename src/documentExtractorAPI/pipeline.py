@@ -2,7 +2,6 @@ from constants import config
 from infer_single import infer_yolov7
 from exception_handling import TesseractOCR, Aadhar_Extraction, PAN_Extraction, Cheque_Extraction, Classify_Document, Classify_Extract_Document
 from classify_document import classify
-import traceback
 
 
 def aadhar_pipeline(image):
@@ -12,9 +11,9 @@ def aadhar_pipeline(image):
         extracted_data, conf_score = infer_yolov7(config.yolov7_aadhar_model_path, image, labels, 'aadhar', False)
         return extracted_data, conf_score
     except TesseractOCR as e:
-        raise TesseractOCR(traceback.print_exc())
+        raise TesseractOCR(e.message)
     except Exception as e:
-        raise Aadhar_Extraction(str(traceback.print_exc()))
+        raise Aadhar_Extraction(str(e))
 
 
 def pan_pipeline(image):
@@ -24,9 +23,9 @@ def pan_pipeline(image):
         extracted_data, conf_score = infer_yolov7(config.yolov7_pan_model_path, image, labels, 'pan', False)
         return extracted_data, conf_score
     except TesseractOCR as e:
-        raise TesseractOCR(traceback.print_exc())
+        raise TesseractOCR(e.message)
     except Exception as e:
-        raise PAN_Extraction(str(traceback.print_exc()))
+        raise PAN_Extraction(str(e))
 
 
 def cheque_pipeline(image):
@@ -36,9 +35,9 @@ def cheque_pipeline(image):
         extracted_data, conf_score = infer_yolov7(config.yolov7_cheque_model_path, image, labels, 'cheque', False)
         return extracted_data, conf_score
     except TesseractOCR as e:
-        raise TesseractOCR(traceback.print_exc())
+        raise TesseractOCR(e.message)
     except Exception as e:
-        raise Cheque_Extraction(str(traceback.print_exc()))
+        raise Cheque_Extraction(str(e))
 
 
 def classify_pipeline(image):
@@ -46,7 +45,7 @@ def classify_pipeline(image):
         document, conf_score = classify(image)
         return document, round(conf_score, 2)
     except Exception as e:
-        raise Classify_Document(str(traceback.print_exc()))
+        raise Classify_Document(str(e))
 
 
 def classify_extract_pipeline(image):
@@ -55,9 +54,9 @@ def classify_extract_pipeline(image):
         extracted_data, conf_score = map_pipeline(document, image)
         return document, extracted_data, conf_score
     except Classify_Document as e:
-        raise Classify_Document(str(traceback.print_exc()))
+        raise Classify_Document(str(e))
     except Exception as e:
-        raise Classify_Extract_Document(str(traceback.print_exc()))
+        raise Classify_Extract_Document(str(e))
 
 
 def map_pipeline(document, image):
@@ -76,12 +75,12 @@ def map_pipeline(document, image):
         return extracted_data, conf_score
 
     except TesseractOCR as e:
-        raise TesseractOCR(traceback.print_exc())
+        raise TesseractOCR(e.message)
     except Aadhar_Extraction as e:
-        raise Aadhar_Extraction(traceback.print_exc())
+        raise Aadhar_Extraction(e.message)
     except PAN_Extraction as e:
-        raise PAN_Extraction(traceback.print_exc())
+        raise PAN_Extraction(e.message)
     except Cheque_Extraction as e:
-        raise Cheque_Extraction(traceback.print_exc())
+        raise Cheque_Extraction(e.message)
     except Exception as e:
-        raise Classify_Extract_Document(str(traceback.print_exc()))
+        raise Classify_Extract_Document(str(e))
