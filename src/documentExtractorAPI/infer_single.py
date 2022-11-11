@@ -13,10 +13,10 @@ def infer_yolov7(model_path, image, labels, typ, transformerOcr):
 
     with torch.no_grad():
         im = Image.fromarray(image)
-        image_path = f'./src/yolov7/runs/detect/exp/{typ}.jpg'
-        im.save(f'./src/yolov7/runs/detect/exp/{typ}.jpg')
+        image_path = f"./src/yolov7/runs/detect/exp/{typ}.jpg"
+        im.save(f"./src/yolov7/runs/detect/exp/{typ}.jpg")
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        half = device.type != 'cpu'  # half precision only supported on CUDA
+        half = device.type != "cpu"  # half precision only supported on CUDA
         # Load model
         model = attempt_load(model_path, map_location=device)  # load FP32 model
         stride = int(model.stride.max())  # model stride
@@ -28,8 +28,12 @@ def infer_yolov7(model_path, image, labels, typ, transformerOcr):
         dataset = LoadImages(image_path, img_size=imgsz, stride=stride)
 
         # Run inference
-        if device.type != 'cpu':
-            model(torch.zeros(1, 3, imgsz, imgsz).to(device).type_as(next(model.parameters())))  # run once
+        if device.type != "cpu":
+            model(
+                torch.zeros(1, 3, imgsz, imgsz)
+                .to(device)
+                .type_as(next(model.parameters()))
+            )  # run once
         for path, img, im0s, vid_cap in dataset:
             img = torch.from_numpy(img).to(device)
             img = img.half() if half else img.float()  # uint8 to fp16/32
@@ -39,22 +43,29 @@ def infer_yolov7(model_path, image, labels, typ, transformerOcr):
             pred = model(img, augment=False)[0]
             pred = non_max_suppression(pred, 0.25, 0.45)
             for i, det in enumerate(pred):
-                p, s, im0, frame = path, '', im0s, getattr(dataset, 'frame', 0)
+                p, s, im0, frame = path, "", im0s, getattr(dataset, "frame", 0)
                 if len(det):
-                    if typ == 'aadhar':
-                        det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
+                    if typ == "aadhar":
+                        det[:, :4] = scale_coords(
+                            img.shape[2:], det[:, :4], im0.shape
+                        ).round()
                         boxes = [i[:4] for i in det.tolist() if i[5] != 4]
                         pred_classes = [i[5] for i in det.tolist() if i[5] != 4]
                         scores = [i[4] for i in det.tolist() if i[5] != 4]
                     else:
-                        det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
+                        det[:, :4] = scale_coords(
+                            img.shape[2:], det[:, :4], im0.shape
+                        ).round()
                         boxes = [i[:4] for i in det.tolist()]
                         pred_classes = [i[5] for i in det.tolist()]
                         scores = [i[4] for i in det.tolist()]
 
             rm_dup = {}
             for i in range(len(pred_classes)):
-                if pred_classes[i] in rm_dup and rm_dup[pred_classes[i]]['score'] < scores[i]:
+                if (
+                    pred_classes[i] in rm_dup
+                    and rm_dup[pred_classes[i]]["score"] < scores[i]
+                ):
                     rm_dup[pred_classes[i]] = dict(score=scores[i], box=boxes[i])
                 elif pred_classes[i] not in rm_dup:
                     rm_dup[pred_classes[i]] = dict(score=scores[i], box=boxes[i])
@@ -62,8 +73,8 @@ def infer_yolov7(model_path, image, labels, typ, transformerOcr):
             boxes, pred_classes, scores = [], [], []
             for k, v in rm_dup.items():
                 pred_classes.append(k)
-                scores.append(v['score'])
-                boxes.append(v['box'])
+                scores.append(v["score"])
+                boxes.append(v["box"])
 
             if not transformerOcr:
                 load = ocr_cropped_image(im0, boxes, pred_classes, scores, labels)

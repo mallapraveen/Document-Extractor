@@ -3,26 +3,25 @@ from ensure import ensure_annotations
 
 img = None
 
+
 def click_event(event, x, y, flags, params):
     # checking for left mouse clicks
     if event == cv2.EVENT_LBUTTONDOWN:
         # displaying the coordinates
         # on the Shell
-        print(x, ' ', y)
+        print(x, " ", y)
 
         # displaying the coordinates
         # on the image window
         font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(img, str(x) + ',' +
-                    str(y), (x, y), font,
-                    1, (255, 0, 0), 2)
-        cv2.imshow('image', img)
+        cv2.putText(img, str(x) + "," + str(y), (x, y), font, 1, (255, 0, 0), 2)
+        cv2.imshow("image", img)
 
     # checking for right mouse clicks
     if event == cv2.EVENT_RBUTTONDOWN:
         # displaying the coordinates
         # on the Shell
-        print(x, ' ', y)
+        print(x, " ", y)
 
         # displaying the coordinates
         # on the image window
@@ -30,11 +29,10 @@ def click_event(event, x, y, flags, params):
         b = img[y, x, 0]
         g = img[y, x, 1]
         r = img[y, x, 2]
-        cv2.putText(img, str(b) + ',' +
-                    str(g) + ',' + str(r),
-                    (x, y), font, 1,
-                    (255, 255, 0), 2)
-        cv2.imshow('image', img)
+        cv2.putText(
+            img, str(b) + "," + str(g) + "," + str(r), (x, y), font, 1, (255, 255, 0), 2
+        )
+        cv2.imshow("image", img)
 
 
 @ensure_annotations
@@ -44,11 +42,11 @@ def get_coordinates(path: str):
     img = cv2.imread(path, 1)
 
     # displaying the image
-    cv2.imshow('image', img)
+    cv2.imshow("image", img)
     # cv2.resize(img,(780,540))
     # setting mouse handler for the image
     # and calling the click_event() function
-    cv2.setMouseCallback('image', click_event)
+    cv2.setMouseCallback("image", click_event)
 
     # wait for a key to be pressed to exit
     cv2.waitKey(0)

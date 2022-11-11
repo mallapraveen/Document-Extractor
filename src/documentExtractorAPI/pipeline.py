@@ -1,14 +1,23 @@
 from constants import config
 from infer_single import infer_yolov7
-from exception_handling import TesseractOCR, Aadhar_Extraction, PAN_Extraction, Cheque_Extraction, Classify_Document, Classify_Extract_Document
+from exception_handling import (
+    TesseractOCR,
+    Aadhar_Extraction,
+    PAN_Extraction,
+    Cheque_Extraction,
+    Classify_Document,
+    Classify_Extract_Document,
+)
 from classify_document import classify
 
 
 def aadhar_pipeline(image):
-    labels = {0: 'aadharNumber', 1: 'address', 2: 'dob', 3: 'gender', 5: 'name'}
+    labels = {0: "aadharNumber", 1: "address", 2: "dob", 3: "gender", 5: "name"}
     # extracted_data, conf_score = get_inference(image)
     try:
-        extracted_data, conf_score = infer_yolov7(config.yolov7_aadhar_model_path, image, labels, 'aadhar', False)
+        extracted_data, conf_score = infer_yolov7(
+            config.yolov7_aadhar_model_path, image, labels, "aadhar", False
+        )
         return extracted_data, conf_score
     except TesseractOCR as e:
         raise TesseractOCR(e.message)
@@ -17,10 +26,12 @@ def aadhar_pipeline(image):
 
 
 def pan_pipeline(image):
-    labels = {0: 'dob', 1: 'father_name', 2: 'name', 3: 'pan'}
+    labels = {0: "dob", 1: "father_name", 2: "name", 3: "pan"}
     # extracted_data, conf_score = get_inference(image)
     try:
-        extracted_data, conf_score = infer_yolov7(config.yolov7_pan_model_path, image, labels, 'pan', False)
+        extracted_data, conf_score = infer_yolov7(
+            config.yolov7_pan_model_path, image, labels, "pan", False
+        )
         return extracted_data, conf_score
     except TesseractOCR as e:
         raise TesseractOCR(e.message)
@@ -29,10 +40,12 @@ def pan_pipeline(image):
 
 
 def cheque_pipeline(image):
-    labels = {0: 'accNumber', 1: 'bank', 2: 'ifsc', 3: 'name'}
+    labels = {0: "accNumber", 1: "bank", 2: "ifsc", 3: "name"}
     # extracted_data, conf_score = get_inference(image)
     try:
-        extracted_data, conf_score = infer_yolov7(config.yolov7_cheque_model_path, image, labels, 'cheque', False)
+        extracted_data, conf_score = infer_yolov7(
+            config.yolov7_cheque_model_path, image, labels, "cheque", False
+        )
         return extracted_data, conf_score
     except TesseractOCR as e:
         raise TesseractOCR(e.message)
@@ -61,15 +74,21 @@ def classify_extract_pipeline(image):
 
 def map_pipeline(document, image):
     try:
-        if document == 'aadhar':
-            labels = {0: 'aadharNumber', 1: 'address', 2: 'dob', 3: 'gender', 5: 'name'}
-            extracted_data, conf_score = infer_yolov7(config.yolov7_aadhar_model_path, image, labels, 'aadhar', False)
-        elif document == 'cheque':
-            labels = {0: 'accNumber', 1: 'bank', 2: 'ifsc', 3: 'name'}
-            extracted_data, conf_score = infer_yolov7(config.yolov7_cheque_model_path, image, labels, 'cheque', False)
-        elif document == 'pan':
-            labels = {0: 'dob', 1: 'father_name', 2: 'name', 3: 'pan'}
-            extracted_data, conf_score = infer_yolov7(config.yolov7_pan_model_path, image, labels, 'pan', False)
+        if document == "aadhar":
+            labels = {0: "aadharNumber", 1: "address", 2: "dob", 3: "gender", 5: "name"}
+            extracted_data, conf_score = infer_yolov7(
+                config.yolov7_aadhar_model_path, image, labels, "aadhar", False
+            )
+        elif document == "cheque":
+            labels = {0: "accNumber", 1: "bank", 2: "ifsc", 3: "name"}
+            extracted_data, conf_score = infer_yolov7(
+                config.yolov7_cheque_model_path, image, labels, "cheque", False
+            )
+        elif document == "pan":
+            labels = {0: "dob", 1: "father_name", 2: "name", 3: "pan"}
+            extracted_data, conf_score = infer_yolov7(
+                config.yolov7_pan_model_path, image, labels, "pan", False
+            )
         else:
             raise Classify_Document("Classification of document failed.")
         return extracted_data, conf_score

@@ -7,14 +7,11 @@ from constants import config
 from aadharGeneration import logger
 from language_translation import convert_to_lang
 
-warnings.filterwarnings('ignore')
+warnings.filterwarnings("ignore")
 
-if __name__ == '__main__':
-
-    
+if __name__ == "__main__":
 
     logger.info("Script Started")
-
 
     # generate_data(5)
     # address_generation(5)
@@ -26,5 +23,5 @@ if __name__ == '__main__':
 
     create_big_aadhar(10, config.template_path, config.images_path)
     create_small_aadhar(10, config.template_path, config.images_path)
-    
+
     logger.info("Script Ended")

@@ -1,10 +1,12 @@
 import sys, os
 from pathlib import Path
-sys.path.insert(0, './src/yolov7')
+
+sys.path.insert(0, "./src/yolov7")
 import cv2
 import warnings
 from constants import config
-warnings.filterwarnings('ignore')
+
+warnings.filterwarnings("ignore")
 
 from constants import config
 from flask import Flask
@@ -12,9 +14,15 @@ from api import flask_app, document_extraction, classification, classify_extract
 from flask_restx import Api, Resource
 from infer_single import infer_yolov7
 from pipeline import aadhar_pipeline
-from pipeline import aadhar_pipeline, pan_pipeline, cheque_pipeline, classify_pipeline, classify_extract_pipeline
+from pipeline import (
+    aadhar_pipeline,
+    pan_pipeline,
+    cheque_pipeline,
+    classify_pipeline,
+    classify_extract_pipeline,
+)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     # image_url = './sample images/Aadhar/Back_0.JPG'
     # image = cv2.imread(image_url)
@@ -39,10 +47,15 @@ if __name__ == '__main__':
     # print(classify_pipeline(image))
     # print(classify_extract_pipeline(image))
 
-    port = os.getenv('PORT', default=8000)
+    port = os.getenv("PORT", default=8000)
     flask_end = Flask(__name__)
     flask_end.register_blueprint(flask_app)
-    app = Api(app=flask_end, version='1.0', title='Document Extraction API', description='Main APIS')
+    app = Api(
+        app=flask_end,
+        version="1.0",
+        title="Document Extraction API",
+        description="Main APIS",
+    )
     app.add_namespace(document_extraction)
     app.add_namespace(classification)
     app.add_namespace(classify_extract)

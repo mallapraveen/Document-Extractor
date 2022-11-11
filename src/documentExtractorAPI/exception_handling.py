@@ -1,16 +1,16 @@
 class CustomException(Exception):
     """Custom Exception
 
-        Attributes:
-            message -- explanation of the error
-        """
+    Attributes:
+        message -- explanation of the error
+    """
 
     def __init__(self, message="Request failed"):
         self.message = message
         super().__init__(self.message)
 
     def __str__(self):
-        return f'{self.message}'
+        return f"{self.message}"
 
 
 class BearerAccessToken(Exception):
@@ -27,7 +27,7 @@ class BearerAccessToken(Exception):
         super().__init__(self.message)
 
     def __str__(self):
-        return f'Status Code:{self.status_code} -> {self.message}'
+        return f"Status Code:{self.status_code} -> {self.message}"
 
 
 class GetFileId(Exception):
@@ -46,7 +46,7 @@ class GetFileId(Exception):
         super().__init__(self.message)
 
     def __str__(self):
-        return f'{self.status_code} -> {self.message}'
+        return f"{self.status_code} -> {self.message}"
 
 
 class TesseractOCR(CustomException):
@@ -111,4 +111,6 @@ class Classify_Extract_Document(CustomException):
     """
 
     def __init__(self, message):
-        super().__init__(f"Classification and extraction of document failed with error --> {message}")
+        super().__init__(
+            f"Classification and extraction of document failed with error --> {message}"
+        )

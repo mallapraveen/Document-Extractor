@@ -31,17 +31,23 @@ class ViTForImageClassification(nn.Module):
 
 
 def classify(image):
-    labels = {0: 'aadhar', 1: 'cheque', 2: 'pan', 3: 'passbook'}
+    labels = {0: "aadhar", 1: "cheque", 2: "pan", 3: "passbook"}
     with torch.no_grad():
-        feature_extractor = ViTFeatureExtractor.from_pretrained(config.vit_transformer_path)
+        feature_extractor = ViTFeatureExtractor.from_pretrained(
+            config.vit_transformer_path
+        )
         model = ViTForImageClassification(4)
-        model.load_state_dict(torch.load(config.vit_transformer_model, map_location=torch.device('cpu')))
+        model.load_state_dict(
+            torch.load(config.vit_transformer_model, map_location=torch.device("cpu"))
+        )
         model.eval()
         inputs = torch.from_numpy(image)
-        inputs = torch.tensor(np.stack(feature_extractor(inputs)['pixel_values'], axis=0))
+        inputs = torch.tensor(
+            np.stack(feature_extractor(inputs)["pixel_values"], axis=0)
+        )
         target = torch.tensor([0])
         prediction, loss = model(inputs, target)
         predicted_class = np.argmax(prediction.cpu())
         probs = nn.functional.softmax(prediction, dim=1).squeeze()
         pos = np.argmax(probs)
-        return labels[predicted_class.item()], probs[pos.item()].item()*100
+        return labels[predicted_class.item()], probs[pos.item()].item() * 100
