@@ -12,8 +12,6 @@ RUN apt-get -y install ffmpeg libsm6 libxext6
 RUN python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-WORKDIR /flaskapp/src/documentExtractorAPI/
-
 EXPOSE 8000
 
-CMD [ "python", "main.py"]
+CMD [ "python", "./src/documentExtractorAPI/main.py"]
