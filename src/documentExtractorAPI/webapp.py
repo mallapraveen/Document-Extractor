@@ -82,15 +82,5 @@ with classify_extract_expander:
         st.json(conf_score)
         
 
-st.write("# For source code please visit my git [link](https://github.com/mallapraveen/Document-Extractor)")
-
-
-
-components.html(
-    """
-        <a href="https://github.com/mallapraveen">GitHub</a>
-        <a href="https://www.linkedin.com/in/mallapraveen/">LinkedIn</a>
-        <a href="https://twitter.com/Malla_Praveen">Twitter</a>
-        <a href="https://www.instagram.com/mallapraveen">Instagram</a>
-    """
-)
+st.write("For source code please visit my git [link](https://github.com/mallapraveen/Document-Extractor)")
+st.write("[My Profile](https://github.com/mallapraveen)")
