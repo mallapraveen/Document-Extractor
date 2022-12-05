@@ -22,6 +22,9 @@ googletrans==3.1.0a0
 randominfo
 python-box
 seaborn
+plotly-express
+fastparquet
+streamlit
 
 transformers==4.16.2
 sentencepiece==0.1.95

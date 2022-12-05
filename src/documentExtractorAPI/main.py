@@ -23,7 +23,7 @@ from pipeline import (
 )
 
 if __name__ == "__main__":
-
+    pass
     # image_url = './sample images/Aadhar/Back_0.JPG'
     # image = cv2.imread(image_url)
     # labels = {0: 'aadharNumber', 1: 'address', 2: 'dob', 3: 'gender', 5: 'name'}
@@ -42,21 +42,21 @@ if __name__ == "__main__":
     # print(infer_yolov7(config.yolov7_cheque_model_path, image, labels, 'cheque', False))
     # print(cheque_pipeline(image))
 
-    # image_url = '../../sample images/Aadhar/Back_0.JPG'
-    # image = cv2.imread(image_url)
-    # print(classify_pipeline(image))
-    # print(classify_extract_pipeline(image))
+    image_url = './sample images/Aadhar/Back_0.JPG'
+    image = cv2.imread(image_url)
+    print(classify_pipeline(image))
+    print(classify_extract_pipeline(image))
 
-    port = os.getenv("PORT", default=8000)
-    flask_end = Flask(__name__)
-    flask_end.register_blueprint(flask_app)
-    app = Api(
-        app=flask_end,
-        version="1.0",
-        title="Document Extraction API",
-        description="Main APIS",
-    )
-    app.add_namespace(document_extraction)
-    app.add_namespace(classification)
-    app.add_namespace(classify_extract)
-    flask_end.run(host="0.0.0.0", port=port, debug=True)
+    # port = os.getenv("PORT", default=8000)
+    # flask_end = Flask(__name__)
+    # flask_end.register_blueprint(flask_app)
+    # app = Api(
+    #     app=flask_end,
+    #     version="1.0",
+    #     title="Document Extraction API",
+    #     description="Main APIS",
+    # )
+    # app.add_namespace(document_extraction)
+    # app.add_namespace(classification)
+    # app.add_namespace(classify_extract)
+    # flask_end.run(host="0.0.0.0", port=port, debug=True)
