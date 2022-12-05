@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import constants
 
-pytesseract.pytesseract.tesseract_cmd = constants.pytesseract_path
+# pytesseract.pytesseract.tesseract_cmd = constants.pytesseract_path
 
 from image_tools import crop_object
 from exception_handling import TesseractOCR
