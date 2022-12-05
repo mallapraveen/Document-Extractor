@@ -15,7 +15,7 @@ from pipeline import (
 from PIL import Image
 import numpy as np
 
-st.write("# Document Extraction")
+st.title("# Document Extraction")
 
 def load_image(image_file):
     img = Image.open(image_file)
@@ -82,5 +82,5 @@ with classify_extract_expander:
         st.json(conf_score)
         
 
-st.write("For source code please visit my git [link](https://github.com/mallapraveen/Document-Extractor)")
-st.write("[My Profile](https://github.com/mallapraveen)")
+st.caption("For source code please visit my git [link](https://github.com/mallapraveen/Document-Extractor)")
+st.caption("[My Profile](https://github.com/mallapraveen)")
