@@ -1,5 +1,7 @@
-import sys
+import sys, os
+import streamlit as st
 sys.path.insert(0, "./src/yolov7")
+os.environ["pytesseract_path"] == st.secrets["pytesseract_path"]
 
 from pipeline import (
     aadhar_pipeline,
@@ -11,7 +13,6 @@ from pipeline import (
 
 from PIL import Image
 import numpy as np
-import streamlit as st
 
 st.write("# Document Extraction")
 
