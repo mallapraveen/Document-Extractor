@@ -82,5 +82,5 @@ with classify_extract_expander:
         st.json(conf_score)
         
 
-st.caption("For source code please visit my git [link](https://github.com/mallapraveen/Document-Extractor)")
-st.caption("[My Profile](https://github.com/mallapraveen)")
+st.subheader("For source code please visit my git [link](https://github.com/mallapraveen/Document-Extractor)")
+st.subheader("[My Profile](https://github.com/mallapraveen)")
