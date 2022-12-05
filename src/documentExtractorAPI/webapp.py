@@ -1,5 +1,6 @@
 import sys, os
 import streamlit as st
+import streamlit.components.v1 as components
 sys.path.insert(0, "./src/yolov7")
 os.environ["pytesseract_path"] == st.secrets["pytesseract_path"]
 
@@ -79,3 +80,17 @@ with classify_extract_expander:
         st.write(f"The document uploaded is {document}.")
         st.json(extracted_data)
         st.json(conf_score)
+        
+
+st.write("# For source code please visit my git [link](https://github.com/mallapraveen/Document-Extractor)")
+
+
+
+components.html(
+    """
+        <a href="https://github.com/mallapraveen">GitHub</a>
+        <a href="https://www.linkedin.com/in/mallapraveen/">LinkedIn</a>
+        <a href="https://twitter.com/Malla_Praveen">Twitter</a>
+        <a href="https://www.instagram.com/mallapraveen">Instagram</a>
+    """
+)
