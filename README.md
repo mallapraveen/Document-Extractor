@@ -44,3 +44,8 @@ This can be extended to other documents like Death Certificate, driving license 
 
 Any kind of enhancement or contribution is welcomed.
 
+
+# Streamlit
+
+Add this to secrets - pytesseract_path = "../../../usr/bin/tesseract"
+
